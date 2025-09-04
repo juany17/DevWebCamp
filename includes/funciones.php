@@ -1,4 +1,8 @@
 <?php
+// Inicia la sesión de inmediato, antes de cualquier salida
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 function debuguear($variable) : string {
     echo "<pre>";
@@ -6,26 +10,22 @@ function debuguear($variable) : string {
     echo "</pre>";
     exit;
 }
+
 function s($html) : string {
-    $s = htmlspecialchars($html);
-    return $s;
+    return htmlspecialchars($html);
 }
 
-function pagina_actual($path ) : bool {
-    return str_contains( $_SERVER['PATH_INFO'] ?? '/', $path  ) ? true : false;
+function pagina_actual($path) : bool {
+    return str_contains($_SERVER['PATH_INFO'] ?? '/', $path);
 }
 
 function is_auth() : bool {
-    if(!isset($_SESSION)) {
-        session_start();
-    }
-    return isset($_SESSION['nombre']) && !empty($_SESSION);
+    // Ya iniciamos sesión arriba, no hace falta session_start aquí
+    return isset($_SESSION['nombre']) && !empty($_SESSION['nombre']);
 }
 
 function is_admin() : bool {
-    if(!isset($_SESSION)) {
-        session_start();
-    }
+    // Ya iniciamos sesión arriba
     return isset($_SESSION['admin']) && !empty($_SESSION['admin']);
 }
 
