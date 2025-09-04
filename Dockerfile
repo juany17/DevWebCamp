@@ -1,5 +1,6 @@
 # 1️⃣ Imagen base con PHP 8.2 y Apache
-FROM php:8.2-apache
+FROM php:8.1-apache
+
 
 # 2️⃣ Instalar extensiones de PHP necesarias
 RUN apt-get update && apt-get install -y unzip git curl \
